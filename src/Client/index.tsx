@@ -131,7 +131,9 @@ namespace ZirconClient {
 				ContextActionService.BindActionAtPriority(
 					Const.ActionId,
 					(_, state, io) => {
-						if (state === Enum.UserInputState.End) {
+						if (!UserInputService.IsKeyDown(Enum.KeyCode.Tab)) return Enum.ContextActionResult.Sink
+
+						if (state === Enum.UserInputState.End && UserInputService.IsKeyDown(Enum.KeyCode.Tab)) {
 							SetVisible(!isVisible);
 						}
 						return Enum.ContextActionResult.Sink;
